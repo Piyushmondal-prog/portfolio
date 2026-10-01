@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piyush Mondal | Student at SST</title>
+<meta name="description" content="Portfolio of Piyush Mondal, Computer Science student at Scaler School of Technology, Bengaluru.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js")</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: { extend: {
+    fontFamily: { display: ['"Cormorant Garamond"', 'Georgia', 'serif'], sans: ['"Source Sans 3"', 'system-ui', 'sans-serif'] },
+    colors: { ink: '#0f1535', indigo2: '#312e81', rose2: '#be185d', gold: '#f59e0b', teal2: '#0d9488', paper: '#f8f7fc' },
+    keyframes: {
+      float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-14px)' } },
+      rise: { from: { opacity: 0, transform: 'translateY(24px)' }, to: { opacity: 1, transform: 'none' } },
+      shimmer: { to: { backgroundPosition: '200% center' } }
+    },
+    animation: { float: 'float 7s ease-in-out infinite', rise: 'rise .8s cubic-bezier(.2,.7,.2,1) both', shimmer: 'shimmer 6s linear infinite' }
+  } }
+}
+</script>
+<style>
+  .rv { transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0s); }
+  .js .rv { opacity: 0; transform: translateY(26px); }
+  .js .rv.in { opacity: 1; transform: none; }
+  .grad-text { background: linear-gradient(90deg, #312e81, #be185d, #f59e0b, #312e81); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .js .rv { opacity: 1; transform: none; } }
+</style>
+</head>
+<body class="bg-paper font-sans text-slate-700 antialiased selection:bg-rose2 selection:text-white">
+
+<div id="progress" class="fixed left-0 top-0 z-50 h-[3px] w-full origin-left scale-x-0 bg-gradient-to-r from-indigo2 via-rose2 to-gold"></div>
+
+<!-- NAV -->
+<header id="nav" class="sticky top-0 z-40 border-b border-transparent bg-paper/80 backdrop-blur transition-shadow">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+    <a href="#" class="font-display text-2xl font-bold text-ink">Piyush Mondal<span class="text-rose2">.</span></a>
+    <nav class="hidden gap-8 font-medium md:flex">
+      <a class="hover:text-rose2" href="#about">About</a>
+      <a class="hover:text-rose2" href="#learning">Learning</a>
+      <a class="hover:text-rose2" href="#projects">Projects</a>
+      <a class="hover:text-rose2" href="#contact">Contact</a>
+    </nav>
+    <button id="menuBtn" class="rounded-md border border-slate-300 px-3 py-1.5 text-sm font-semibold md:hidden" aria-expanded="false" aria-controls="menu">Menu</button>
+  </div>
+  <nav id="menu" class="hidden flex-col gap-3 border-t border-slate-200 px-5 py-4 font-medium md:hidden">
+    <a href="#about">About</a><a href="#learning">Learning</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="relative overflow-hidden">
+  <div class="pointer-events-none absolute -left-24 top-10 h-72 w-72 animate-float rounded-full bg-indigo-300/40 blur-3xl"></div>
+  <div class="pointer-events-none absolute -right-20 top-40 h-80 w-80 animate-float rounded-full bg-rose-300/40 blur-3xl" style="animation-delay:-3s"></div>
+  <div class="pointer-events-none absolute bottom-0 left-1/3 h-56 w-56 animate-float rounded-full bg-amber-200/50 blur-3xl" style="animation-delay:-5s"></div>
+
+  <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:grid-cols-[1.2fr_.8fr] md:py-24">
+    <div>
+      <div class="flex flex-wrap gap-2 text-sm font-semibold animate-rise">
+        <span class="rounded-full bg-indigo2 px-3 py-1 text-white">Student at SST</span>
+        <span class="rounded-full bg-rose2/10 px-3 py-1 text-rose2">Bengaluru, India</span>
+      </div>
+      <h1 class="mt-5 font-display text-6xl font-bold leading-[.95] text-ink animate-rise sm:text-7xl md:text-8xl" style="animation-delay:.12s">
+        Hi, I'm <span class="grad-text animate-shimmer">Piyush.</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-xl text-slate-600 animate-rise" style="animation-delay:.24s">
+        I'm studying Computer Science with a focus on AI and ML, and building my skills one project, one note and one problem at a time.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4 animate-rise" style="animation-delay:.36s">
+        <a href="#learning" class="rounded-lg bg-gradient-to-r from-indigo2 to-rose2 px-6 py-3 font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0">Read my notes</a>
+        <a href="#projects" class="rounded-lg border-2 border-ink px-6 py-3 font-semibold text-ink transition hover:-translate-y-0.5 hover:bg-ink hover:text-white">Explore projects</a>
+      </div>
+    </div>
+
+    <div class="mx-auto animate-rise" style="animation-delay:.3s">
+      <div class="rounded-3xl bg-gradient-to-br from-indigo2 via-rose2 to-gold p-1.5 shadow-2xl shadow-indigo-900/20">
+        <img src="img.jpeg" alt="Portrait of Piyush Mondal" class="h-80 w-72 rounded-[1.35rem] bg-slate-200 object-cover transition duration-700 hover:scale-[1.03] sm:h-96 sm:w-80">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="mx-auto max-w-6xl px-5">
+  <div class="rv grid grid-cols-2 gap-4 rounded-2xl bg-ink p-6 text-center text-white md:grid-cols-4">
+    <div><div class="font-display text-5xl font-bold text-gold"><span data-count="1">0</span><sup class="text-2xl">st</sup></div><p class="text-sm text-slate-300">Year of study</p></div>
+    <div><div class="font-display text-5xl font-bold text-gold" data-count="2">0</div><p class="text-sm text-slate-300">Degree programs</p></div>
+    <div><div class="font-display text-5xl font-bold text-gold" data-count="4">0</div><p class="text-sm text-slate-300">Learning tracks</p></div>
+    <div><div class="font-display text-5xl font-bold text-gold" data-count="365">0</div><p class="text-sm text-slate-300">Days to keep building</p></div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section class="mx-auto mt-10 max-w-6xl px-5">
+  <div class="rv flex flex-wrap items-center gap-3 border-y border-slate-300 py-5 font-semibold">
+    <span class="mr-2 text-slate-500">Find me on</span>
+    <a href="https://github.com/Piyushmondal-prog" class="rounded-full bg-white px-4 py-1.5 shadow-sm ring-1 ring-slate-200 transition hover:bg-ink hover:text-white">GitHub</a>
+    <a href="https://www.linkedin.com/in/piyush-mondal-6b053342a/" class="rounded-full bg-white px-4 py-1.5 shadow-sm ring-1 ring-slate-200 transition hover:bg-indigo2 hover:text-white">LinkedIn</a>
+    <a href="#" class="rounded-full bg-white px-4 py-1.5 shadow-sm ring-1 ring-slate-200 transition hover:bg-rose2 hover:text-white">Twitter / X</a>
+    <a href="#" class="rounded-full bg-white px-4 py-1.5 shadow-sm ring-1 ring-slate-200 transition hover:bg-gold hover:text-ink">RSS</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="mx-auto max-w-6xl scroll-mt-20 px-5 py-20">
+  <div class="rv max-w-2xl">
+    <h2 class="font-display text-5xl font-bold text-ink">About me</h2>
+    <p class="mt-3 text-lg text-slate-600">A first-year student who likes understanding how things work and then building them.</p>
+  </div>
+  <div class="mt-10 grid gap-6 md:grid-cols-2">
+    <article class="rv group rounded-2xl border-t-4 border-indigo2 bg-white p-7 shadow-sm transition hover:-translate-y-1.5 hover:shadow-xl">
+      <h3 class="font-display text-3xl font-bold text-indigo2">Scaler School of Technology</h3>
+      <p class="mt-1 font-semibold text-slate-500">B.Sc. Computer Science, AI and ML specialization</p>
+      <p class="mt-3">Based in Bengaluru, I work on data structures, system design and computer science fundamentals through hands-on practice.</p>
+    </article>
+    <article class="rv group rounded-2xl border-t-4 border-rose2 bg-white p-7 shadow-sm transition hover:-translate-y-1.5 hover:shadow-xl" style="--d:.15s">
+      <h3 class="font-display text-3xl font-bold text-rose2">IIT Madras BS Program</h3>
+      <p class="mt-1 font-semibold text-slate-500">Data Science and Applications</p>
+      <p class="mt-3">Alongside college, I am working toward the IIT Madras BS degree, which adds a strong data and statistics foundation.</p>
+    </article>
+  </div>
+</section>
+
+<!-- LEARNING -->
+<section id="learning" class="scroll-mt-20 bg-gradient-to-b from-indigo-50 to-paper py-20">
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="rv max-w-2xl">
+      <h2 class="font-display text-5xl font-bold text-ink">Learn where you are</h2>
+      <p class="mt-3 text-lg text-slate-600">Explore the coding tracks I'm studying right now.</p>
+    </div>
+    <div class="mt-10 grid gap-5 sm:grid-cols-2">
+      <a href="#" class="rv group rounded-2xl bg-gradient-to-br from-indigo-600 to-indigo-900 p-7 text-white shadow-lg transition hover:-translate-y-1.5 hover:shadow-2xl">
+        <div class="text-3xl">🧮</div><h3 class="mt-3 font-display text-3xl font-bold">Data Structures &amp; Algorithms</h3>
+        <p class="mt-1 text-indigo-100">Problem solving, patterns and complexity.</p>
+      </a>
+      <a href="#" class="rv group rounded-2xl bg-gradient-to-br from-rose-500 to-rose-800 p-7 text-white shadow-lg transition hover:-translate-y-1.5 hover:shadow-2xl" style="--d:.1s">
+        <div class="text-3xl">🏗️</div><h3 class="mt-3 font-display text-3xl font-bold">High-level System Design</h3>
+        <p class="mt-1 text-rose-100">Scalable architecture and trade-offs.</p>
+      </a>
+      <a href="#" class="rv group rounded-2xl bg-gradient-to-br from-amber-400 to-orange-600 p-7 text-white shadow-lg transition hover:-translate-y-1.5 hover:shadow-2xl" style="--d:.2s">
+        <div class="text-3xl">🧩</div><h3 class="mt-3 font-display text-3xl font-bold">Low-level Design</h3>
+        <p class="mt-1 text-amber-50">Clean classes, patterns and maintainable code.</p>
+      </a>
+      <a href="#" class="rv group rounded-2xl bg-gradient-to-br from-teal-500 to-teal-800 p-7 text-white shadow-lg transition hover:-translate-y-1.5 hover:shadow-2xl" style="--d:.3s">
+        <div class="text-3xl">💻</div><h3 class="mt-3 font-display text-3xl font-bold">Computer Science Fundamentals</h3>
+        <p class="mt-1 text-teal-50">Operating systems, networks and databases.</p>
+      </a>
+    </div>
+    <div class="rv mt-10 flex flex-wrap gap-2">
+      <span class="mr-2 self-center font-semibold text-slate-500">Currently exploring</span>
+      <span class="rounded-full bg-indigo-100 px-3 py-1 text-sm font-semibold text-indigo-800">Python</span>
+      <span class="rounded-full bg-rose-100 px-3 py-1 text-sm font-semibold text-rose-800">Machine Learning</span>
+      <span class="rounded-full bg-amber-100 px-3 py-1 text-sm font-semibold text-amber-800">Git &amp; GitHub</span>
+      <span class="rounded-full bg-teal-100 px-3 py-1 text-sm font-semibold text-teal-800">HTML, CSS &amp; Tailwind</span>
+      <span class="rounded-full bg-sky-100 px-3 py-1 text-sm font-semibold text-sky-800">Data Science</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="mx-auto max-w-6xl scroll-mt-20 px-5 py-20">
+  <div class="rv flex flex-wrap items-end justify-between gap-4">
+    <div class="max-w-2xl">
+      <h2 class="font-display text-5xl font-bold text-ink">Recent projects</h2>
+      <p class="mt-3 text-lg text-slate-600">Ideas, experiments and engineering lessons.</p>
+    </div>
+    <a href="https://github.com/Piyushmondal-prog" class="font-semibold text-rose2 underline-offset-4 hover:underline">See all on GitHub</a>
+  </div>
+  <div class="mt-10 grid gap-6 md:grid-cols-3">
+    <article class="rv rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1.5 hover:border-indigo2 hover:shadow-xl">
+      <div class="h-32 rounded-xl bg-gradient-to-br from-indigo-200 via-indigo-100 to-rose-100"></div>
+      <h3 class="mt-4 font-display text-2xl font-bold text-ink">Portfolio website</h3>
+      <p class="mt-1 text-sm">This site, built with HTML, CSS and Tailwind.</p>
+      <span class="mt-3 inline-block rounded-full bg-emerald-100 px-3 py-0.5 text-xs font-semibold text-emerald-800">In progress</span>
+    </article>
+    <article class="rv rounded-2xl border border-dashed border-slate-300 bg-white/60 p-6" style="--d:.12s">
+      <div class="h-32 rounded-xl bg-gradient-to-br from-rose-100 to-amber-100"></div>
+      <h3 class="mt-4 font-display text-2xl font-bold text-ink">Project two</h3>
+      <p class="mt-1 text-sm">A place for your next experiment.</p>
+      <span class="mt-3 inline-block rounded-full bg-slate-100 px-3 py-0.5 text-xs font-semibold text-slate-600">Coming soon</span>
+    </article>
+    <article class="rv rounded-2xl border border-dashed border-slate-300 bg-white/60 p-6" style="--d:.24s">
+      <div class="h-32 rounded-xl bg-gradient-to-br from-amber-100 to-teal-100"></div>
+      <h3 class="mt-4 font-display text-2xl font-bold text-ink">Project three</h3>
+      <p class="mt-1 text-sm">A place for your next experiment.</p>
+      <span class="mt-3 inline-block rounded-full bg-slate-100 px-3 py-0.5 text-xs font-semibold text-slate-600">Coming soon</span>
+    </article>
+  </div>
+  <article class="rv mt-6 flex flex-col justify-between gap-3 rounded-2xl bg-ink p-7 text-white sm:flex-row sm:items-center">
+    <div><h3 class="font-display text-3xl font-bold text-gold">Recent learning</h3><p class="text-slate-300">Notes from my research across the internet.</p></div>
+    <a href="#" class="rounded-lg bg-gold px-5 py-2.5 text-center font-semibold text-ink transition hover:bg-amber-300">Open the knowledge map</a>
+  </article>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="mx-auto max-w-6xl scroll-mt-20 px-5 pb-20">
+  <div class="rv rounded-3xl bg-gradient-to-r from-indigo2 via-rose2 to-orange-500 p-10 text-center text-white shadow-2xl shadow-rose-900/20 md:p-14">
+    <h2 class="font-display text-5xl font-bold">Let's build something together</h2>
+    <p class="mx-auto mt-3 max-w-xl text-lg text-white/90">Open to collaborations, study groups and conversations about code.</p>
+    <div class="mt-7 flex flex-wrap justify-center gap-4">
+      <a href="https://www.linkedin.com/in/piyush-mondal-6b053342a/" class="rounded-lg bg-white px-6 py-3 font-semibold text-ink transition hover:-translate-y-0.5 hover:shadow-lg">Message on LinkedIn</a>
+      <a href="https://github.com/Piyushmondal-prog" class="rounded-lg border-2 border-white px-6 py-3 font-semibold transition hover:-translate-y-0.5 hover:bg-white hover:text-ink">View GitHub</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="bg-ink text-slate-300">
+  <div class="mx-auto grid max-w-6xl gap-8 px-5 py-12 sm:grid-cols-3">
+    <div><p class="font-display text-2xl font-bold text-white">Writings and Learnings</p><p class="mt-2 text-sm">Blog posts and study notes, coming soon.</p></div>
+    <div><p class="font-display text-2xl font-bold text-white">About</p><p class="mt-2 text-sm">Computer Science student at SST, Bengaluru.</p></div>
+    <div><p class="font-display text-2xl font-bold text-white">Learning tracks</p><p class="mt-2 text-sm">DSA, system design, low-level design and CS fundamentals.</p></div>
+  </div>
+  <div class="border-t border-white/15">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-5 text-sm">
+      <p>&copy; 2026 Piyush Mondal.</p>
+      <div class="flex gap-5"><a class="hover:text-white" href="https://github.com/Piyushmondal-prog">GitHub</a><a class="hover:text-white" href="https://www.linkedin.com/in/piyush-mondal-6b053342a/">LinkedIn</a><a class="hover:text-white" href="#">Back to top</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var bar = document.getElementById("progress"), nav = document.getElementById("nav");
+  function onScroll() {
+    var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+    bar.style.transform = "scaleX(" + (max > 0 ? h.scrollTop / max : 0) + ")";
+    nav.classList.toggle("shadow-lg", h.scrollTop > 8);
+  }
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  var btn = document.getElementById("menuBtn"), menu = document.getElementById("menu");
+  btn.addEventListener("click", function () {
+    var open = menu.classList.toggle("hidden") === false;
+    menu.classList.toggle("flex", open); btn.setAttribute("aria-expanded", open);
+  });
+  menu.addEventListener("click", function (e) { if (e.target.tagName === "A") { menu.classList.add("hidden"); menu.classList.remove("flex"); } });
+
+  function count(el) {
+    var end = +el.dataset.count, t0 = null;
+    (function step(t) { t0 = t0 || t; var p = Math.min((t - t0) / 1200, 1); el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); })(performance.now());
+  }
+  var items = document.querySelectorAll(".rv"), reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!("IntersectionObserver" in window) || reduce) {
+    items.forEach(function (e) { e.classList.add("in"); });
+    document.querySelectorAll("[data-count]").forEach(function (e) { e.textContent = e.dataset.count; });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      en.target.classList.add("in");
+      en.target.querySelectorAll("[data-count]").forEach(count);
+      io.unobserve(en.target);
+    });
+  }, { threshold: 0.15 });
+  items.forEach(function (e) { io.observe(e); });
+})();
+</script>
+</body>
+</html>
