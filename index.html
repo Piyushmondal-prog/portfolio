@@ -29,18 +29,56 @@ tailwind.config = {
   .js .rv { opacity: 0; transform: translateY(26px); }
   .js .rv.in { opacity: 1; transform: none; }
   .grad-text { background: linear-gradient(90deg, #312e81, #be185d, #f59e0b, #312e81); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* ---- added motion ---- */
+  @property --a { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+  @keyframes spin { to { --a: 360deg; } }
+  @keyframes wordUp { from { transform: translateY(105%) rotate(4deg); } to { transform: none; } }
+  @keyframes mq { to { transform: translateX(-50%); } }
+  @keyframes pan { to { background-position: 100% 100%; } }
+  @keyframes wiggle { 25% { transform: rotate(-14deg) scale(1.15); } 60% { transform: rotate(10deg) scale(1.15); } }
+  .wr { display: inline-block; overflow: hidden; padding: 0 .06em .14em; margin: 0 -.06em -.14em; vertical-align: top; }
+  .wi { display: inline-block; animation: wordUp 1s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(.1s + var(--i) * .13s); transform-origin: left bottom; }
+  .ring { background: conic-gradient(from var(--a), #312e81, #be185d, #f59e0b, #0d9488, #312e81); animation: spin 6s linear infinite; }
+  .spot { position: relative; }
+  .spot::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s;
+    background: radial-gradient(380px circle at var(--mx,50%) var(--my,50%), var(--glow, rgba(190,24,93,.10)), transparent 60%); }
+  .spot:hover::after { opacity: 1; }
+  #learning .spot { --glow: rgba(255,255,255,.28); }
+  #learning a:hover .text-3xl { animation: wiggle .6s ease; }
+  #learning span.rounded-full { transition: transform .35s cubic-bezier(.34,1.56,.64,1); }
+  #learning span.rounded-full:hover { transform: translateY(-3px) scale(1.08); }
+  #projects .h-32 { background-size: 200% 200%; animation: pan 7s ease-in-out infinite alternate; }
+  .rv h2 { display: inline-block; }
+  .rv h2::after { content: ""; display: block; height: 4px; width: 0; margin-top: .6rem; border-radius: 4px; background: linear-gradient(90deg,#312e81,#be185d,#f59e0b); transition: width .9s .3s cubic-bezier(.2,.7,.2,1); }
+  .rv.in h2::after { width: 3.5rem; }
+  #contact h2::after { display: none; }
+  .js .stats > div { opacity: 0; transform: translateY(18px) scale(.94); transition: opacity .6s, transform .7s cubic-bezier(.34,1.4,.64,1); transition-delay: calc(.2s + var(--i,0) * .12s); }
+  .js .stats.in > div { opacity: 1; transform: none; }
+  #dnav a { position: relative; }
+  #dnav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: #be185d; transform: scaleX(0); transform-origin: right; transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+  #dnav a:hover::after, #dnav a.on::after { transform: scaleX(1); transform-origin: left; }
+  #dnav a.on { color: #be185d; }
+  main a.rounded-lg { position: relative; overflow: hidden; transition-property: color,background-color,border-color,box-shadow,translate,transform; transition-duration: .25s; }
+  main a.rounded-lg::before { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.45) 50%, transparent 65%); transform: translateX(-120%); }
+  main a.rounded-lg:hover::before { transform: translateX(120%); transition: transform .7s ease; }
+  .mq { overflow: hidden; -webkit-mask-image: linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image: linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+  .mq-track { display: flex; width: max-content; animation: mq 34s linear infinite; }
+  .mq:hover .mq-track { animation-play-state: paused; }
+  .mq-g { display: flex; align-items: center; gap: 2rem; padding-right: 2rem; }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .js .rv { opacity: 1; transform: none; } }
 </style>
 </head>
 <body class="bg-paper font-sans text-slate-700 antialiased selection:bg-rose2 selection:text-white">
 
+<div id="glow" class="pointer-events-none fixed left-0 top-0 z-30 h-[400px] w-[400px] rounded-full opacity-0" style="background:radial-gradient(circle,rgba(190,24,93,.10),rgba(49,46,129,.06) 45%,transparent 70%);transition:opacity .4s"></div>
 <div id="progress" class="fixed left-0 top-0 z-50 h-[3px] w-full origin-left scale-x-0 bg-gradient-to-r from-indigo2 via-rose2 to-gold"></div>
 
 <!-- NAV -->
 <header id="nav" class="sticky top-0 z-40 border-b border-transparent bg-paper/80 backdrop-blur transition-shadow">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
     <a href="#" class="font-display text-2xl font-bold text-ink">Piyush Mondal<span class="text-rose2">.</span></a>
-    <nav class="hidden gap-8 font-medium md:flex">
+    <nav id="dnav" class="hidden gap-8 font-medium md:flex">
       <a class="hover:text-rose2" href="#about">About</a>
       <a class="hover:text-rose2" href="#learning">Learning</a>
       <a class="hover:text-rose2" href="#projects">Projects</a>
@@ -66,8 +104,8 @@ tailwind.config = {
         <span class="rounded-full bg-indigo2 px-3 py-1 text-white">Student at SST</span>
         <span class="rounded-full bg-rose2/10 px-3 py-1 text-rose2">Bengaluru, India</span>
       </div>
-      <h1 class="mt-5 font-display text-6xl font-bold leading-[.95] text-ink animate-rise sm:text-7xl md:text-8xl" style="animation-delay:.12s">
-        Hi, I'm <span class="grad-text animate-shimmer">Piyush.</span>
+      <h1 class="mt-5 font-display text-6xl font-bold leading-[.95] text-ink sm:text-7xl md:text-8xl">
+        <span class="wr"><span class="wi" style="--i:0">Hi,</span></span> <span class="wr"><span class="wi" style="--i:1">I'm</span></span> <span class="wr"><span class="wi" style="--i:2"><span class="grad-text animate-shimmer">Piyush.</span></span></span>
       </h1>
       <p class="mt-6 max-w-xl text-xl text-slate-600 animate-rise" style="animation-delay:.24s">
         I'm studying Computer Science with a focus on AI and ML, and building my skills one project, one note and one problem at a time.
@@ -79,7 +117,7 @@ tailwind.config = {
     </div>
 
     <div class="mx-auto animate-rise" style="animation-delay:.3s">
-      <div class="rounded-3xl bg-gradient-to-br from-indigo2 via-rose2 to-gold p-1.5 shadow-2xl shadow-indigo-900/20">
+      <div class="ring tilt rounded-3xl p-1.5 shadow-2xl shadow-indigo-900/20">
         <img src="img.jpeg" alt="Portrait of Piyush Mondal" class="h-80 w-72 rounded-[1.35rem] bg-slate-200 object-cover transition duration-700 hover:scale-[1.03] sm:h-96 sm:w-80">
       </div>
     </div>
@@ -88,13 +126,15 @@ tailwind.config = {
 
 <!-- STATS -->
 <section class="mx-auto max-w-6xl px-5">
-  <div class="rv grid grid-cols-2 gap-4 rounded-2xl bg-ink p-6 text-center text-white md:grid-cols-4">
+  <div class="rv stats grid grid-cols-2 gap-4 rounded-2xl bg-ink p-6 text-center text-white md:grid-cols-4">
     <div><div class="font-display text-5xl font-bold text-gold"><span data-count="1">0</span><sup class="text-2xl">st</sup></div><p class="text-sm text-slate-300">Year of study</p></div>
     <div><div class="font-display text-5xl font-bold text-gold" data-count="2">0</div><p class="text-sm text-slate-300">Degree programs</p></div>
     <div><div class="font-display text-5xl font-bold text-gold" data-count="4">0</div><p class="text-sm text-slate-300">Learning tracks</p></div>
     <div><div class="font-display text-5xl font-bold text-gold" data-count="365">0</div><p class="text-sm text-slate-300">Days to keep building</p></div>
   </div>
 </section>
+
+<section class="mq mt-10 py-2" aria-hidden="true"><div class="mq-track"><div class="mq-g"><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">Python</span><span class="text-rose2">✦</span><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">Machine Learning</span><span class="text-rose2">✦</span><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">Data Structures</span><span class="text-rose2">✦</span><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">System Design</span><span class="text-rose2">✦</span><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">Low-level Design</span><span class="text-rose2">✦</span><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">Git &amp; GitHub</span><span class="text-rose2">✦</span><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">Data Science</span><span class="text-rose2">✦</span><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">Tailwind</span><span class="text-rose2">✦</span></div><div class="mq-g"><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">Python</span><span class="text-rose2">✦</span><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">Machine Learning</span><span class="text-rose2">✦</span><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">Data Structures</span><span class="text-rose2">✦</span><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">System Design</span><span class="text-rose2">✦</span><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">Low-level Design</span><span class="text-rose2">✦</span><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">Git &amp; GitHub</span><span class="text-rose2">✦</span><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">Data Science</span><span class="text-rose2">✦</span><span class="whitespace-nowrap font-display text-4xl font-bold text-ink/80">Tailwind</span><span class="text-rose2">✦</span></div></div></section>
 
 <!-- SOCIAL -->
 <section class="mx-auto mt-10 max-w-6xl px-5">
@@ -207,6 +247,27 @@ tailwind.config = {
       <a href="https://www.linkedin.com/in/piyush-mondal-6b053342a/" class="rounded-lg bg-white px-6 py-3 font-semibold text-ink transition hover:-translate-y-0.5 hover:shadow-lg">Message on LinkedIn</a>
       <a href="https://github.com/Piyushmondal-prog" class="rounded-lg border-2 border-white px-6 py-3 font-semibold transition hover:-translate-y-0.5 hover:bg-white hover:text-ink">View GitHub</a>
     </div>
+    <div class="mt-8 mx-auto max-w-3xl rounded-2xl bg-white/15 p-6 text-left backdrop-blur-sm">
+      <h3 class="font-display text-2xl font-bold">Personal details</h3>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2">
+        <a href="mailto:piyushmondal204@gmail.com" class="rounded-xl bg-white/10 p-4 transition hover:bg-white/20">
+          <span class="block text-sm text-white/70">Email</span>
+          <span class="font-semibold">piyushmondal204@gmail.com</span>
+        </a>
+        <a href="tel:+917981790739" class="rounded-xl bg-white/10 p-4 transition hover:bg-white/20">
+          <span class="block text-sm text-white/70">Phone</span>
+          <span class="font-semibold">+91 79817 90739</span>
+        </a>
+        <div class="rounded-xl bg-white/10 p-4">
+          <span class="block text-sm text-white/70">Date of birth</span>
+          <span class="font-semibold">17 January 2007</span>
+        </div>
+        <div class="rounded-xl bg-white/10 p-4">
+          <span class="block text-sm text-white/70">Location</span>
+          <span class="font-semibold">Bengaluru, India</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 </main>
@@ -220,7 +281,7 @@ tailwind.config = {
   <div class="border-t border-white/15">
     <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-5 text-sm">
       <p>&copy; 2026 Piyush Mondal.</p>
-      <div class="flex gap-5"><a class="hover:text-white" href="https://github.com/Piyushmondal-prog">GitHub</a><a class="hover:text-white" href="https://www.linkedin.com/in/piyush-mondal-6b053342a/">LinkedIn</a><a class="hover:text-white" href="#">Back to top</a></div>
+      <div class="flex flex-wrap gap-5"><a class="hover:text-white" href="https://github.com/Piyushmondal-prog">GitHub</a><a class="hover:text-white" href="https://www.linkedin.com/in/piyush-mondal-6b053342a/">LinkedIn</a><a class="hover:text-white" href="mailto:piyushmondal204@gmail.com">Email</a><a class="hover:text-white" href="#">Back to top</a></div>
     </div>
   </div>
 </footer>
@@ -261,6 +322,52 @@ tailwind.config = {
     });
   }, { threshold: 0.15 });
   items.forEach(function (e) { io.observe(e); });
+})();
+</script>
+<script>
+(function () {
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
+  document.querySelectorAll(".stats > div").forEach(function (d, i) { d.style.setProperty("--i", i); });
+
+  if ("IntersectionObserver" in window) {
+    var so = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        document.querySelectorAll("#dnav a").forEach(function (a) { a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id); });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    ["about", "learning", "projects", "contact"].forEach(function (id) { so.observe(document.getElementById(id)); });
+  }
+  if (reduce || !fine) return;
+
+  var g = document.getElementById("glow"), gx = 0, gy = 0, tx = 0, ty = 0;
+  (function loop() { gx += (tx - gx) * .12; gy += (ty - gy) * .12; g.style.transform = "translate(" + (gx - 200) + "px," + (gy - 200) + "px)"; requestAnimationFrame(loop); })();
+
+  var orbs = document.querySelectorAll("section.relative.overflow-hidden > div.pointer-events-none"), mx = 0, my = 0;
+  function par() { orbs.forEach(function (o, i) { o.style.translate = (mx * -34 * (i + 1)) + "px " + (my * -34 * (i + 1) + scrollY * .08 * (i + 1)) + "px"; }); }
+  addEventListener("pointermove", function (e) { tx = e.clientX; ty = e.clientY; g.style.opacity = 1; mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5; par(); });
+  addEventListener("scroll", par, { passive: true });
+  document.addEventListener("pointerleave", function () { g.style.opacity = 0; });
+
+  document.querySelectorAll("#about article, #learning a.rv, #projects article, .tilt").forEach(function (el) {
+    el.classList.add("spot");
+    el.addEventListener("pointermove", function (e) {
+      var r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      el.style.transition = "transform .12s ease-out, box-shadow .3s";
+      el.style.transform = "perspective(900px) rotateX(" + ((.5 - y) * 7) + "deg) rotateY(" + ((x - .5) * 9) + "deg) translateY(-6px)";
+      el.style.setProperty("--mx", x * 100 + "%"); el.style.setProperty("--my", y * 100 + "%");
+    });
+    el.addEventListener("pointerleave", function () { el.style.transition = ""; el.style.transform = ""; });
+  });
+
+  document.querySelectorAll("main a.rounded-lg").forEach(function (b) {
+    b.addEventListener("pointermove", function (e) {
+      var r = b.getBoundingClientRect();
+      b.style.translate = ((e.clientX - r.left - r.width / 2) * .25) + "px " + ((e.clientY - r.top - r.height / 2) * .35) + "px";
+    });
+    b.addEventListener("pointerleave", function () { b.style.translate = ""; });
+  });
 })();
 </script>
 </body>
